@@ -1,0 +1,40 @@
+<?xml version = "1.0" encoding = "utf-8"?>
+<cairngorm:ServiceLocator xmlns:mx = "http://www.adobe.com/2006/mxml" 
+    xmlns:cairngorm = "com.adobe.cairngorm.business.*">
+
+    <mx:Script>
+        <![CDATA[
+            import mx.utils.StringUtil;
+            import mx.utils.UIDUtil;
+            
+            [Bindable]
+            private var serviceUrlDictionary:ServiceUrlDictionary = 
+                ServiceUrlDictionary.getInstance();
+            
+            public static const GET_SYS_CONFIG_INFO:String = 
+                "GetListService"
+                
+            public function convertUrl(value:String):String 
+            {
+                var tmp:String = value;
+                if (tmp && -1 == tmp.lastIndexOf('?')) 
+                {
+                    tmp += '?';
+                }
+                else 
+                {
+                    tmp += '&';
+                }
+                return tmp;
+            }
+            
+        ]]>
+    </mx:Script>
+
+    <mx:RemoteObject id="GetListService" destination="getList" />
+<!--    
+    <mx:HTTPService id = "GetListService"
+         url = "{convertUrl(serviceUrlDictionary.listXmlUrl)}" 
+         method="POST" resultFormat = "e4x"/>
+-->
+</cairngorm:ServiceLocator>

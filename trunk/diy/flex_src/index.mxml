@@ -1,0 +1,8 @@
+<?xml version = "1.0" encoding = "utf-8"?>
+<mx:Application xmlns:mx = "http://www.adobe.com/2006/mxml" 
+    xmlns:view = "diy.view.*" layout = "absolute" styleName="application">
+    <mx:Style source = "assets/diy.css"/>
+      
+    <view:MainStage/>
+     
+</mx:Application>

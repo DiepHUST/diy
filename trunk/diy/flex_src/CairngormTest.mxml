@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Application
+xmlns:mx="http://www.adobe.com/2006/mxml"
+layout="absolute" applicationComplete="init()">
+   
+<mx:Script>
+<![CDATA[
+    import diy.control.Controller;
+    import diy.business.base.Service;
+    import diy.model.MainModelLocator;
+    import com.adobe.cairngorm.control.CairngormEvent;
+    import com.adobe.cairngorm.control.CairngormEventDispatcher;
+
+    private var service:Service, controller:Controller;
+      
+    [Bindable]
+    private var model:MainModelLocator = MainModelLocator.getInstance();
+    private function init():void{
+        controller = new Controller; 
+        service = new Service;
+        CairngormEventDispatcher.getInstance().dispatchEvent(new CairngormEvent("getList"));
+    }
+]]>
+</mx:Script>
+<mx:List dataProvider="{model.list}" />
+</mx:Application>

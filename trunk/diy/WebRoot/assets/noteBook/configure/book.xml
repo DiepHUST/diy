@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<books>
+    <book id="0" title="book" pic="assets/noteBook/image/0.jpg"/>
+    <book id="2" title="book" pic="assets/noteBook/image/1.jpg"/>
+    <book id="3" title="book" pic="assets/noteBook/image/0.jpg"/>
+    <book id="4" title="book" pic="assets/noteBook/image/1.jpg"/>
+    <book id="5" title="book" pic="assets/noteBook/image/0.jpg"/>
+    <book id="6" title="book" pic="assets/noteBook/image/1.jpg"/>
+    <book id="7" title="book" pic="assets/noteBook/image/0.jpg"/>
+    <book id="8" title="book" pic="assets/noteBook/image/1.jpg"/>
+</books>
