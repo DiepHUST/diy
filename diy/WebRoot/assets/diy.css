@@ -1,0 +1,12 @@
+/* CSS file */
+
+global
+{
+	backgroundColor: white;
+}
+
+.application
+{
+    background-image: Embed("/assets/common/background.png");
+    background-size:"100%";
+}

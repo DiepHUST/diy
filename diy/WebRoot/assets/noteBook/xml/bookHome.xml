@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<books>
+    <config font = "宋体" pic="assets/noteBook/image/0.jpg"/>
+    <note title = "测试页面" data = "2009-03-12">测试页面</note>
+</books>
