@@ -12,7 +12,7 @@
 	public class Setting 
 	{
 		public static const MAIN_XML:String = "configure/common/sysConfig.xml";
-	
+		public static const VIDEO001:String = "videos/video001.swf";
 		public function Setting() 
 		{
 			
