@@ -66,7 +66,7 @@
 		{
 			removeLoader();
 			var xml:XML = new XML(event.target.data);
-			//dispatcher.dispatchEvent(new TestModuleEvent(TestModuleEvent.GET_BOBO_MODULE_RESPONSE,"", xml));
+			dispatcher.dispatchEvent(new TestModuleEvent(TestModuleEvent.GET_BOBO_MODULE_RESPONSE,"", xml));
 		
 		}
 		

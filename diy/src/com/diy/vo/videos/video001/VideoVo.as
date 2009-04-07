@@ -9,7 +9,7 @@
 	 * @version Version 1.0
 	 * @description the class function
 	 */
-	public class VideoVo 
+	public class VideoVo
 	{
 		private var _url:String;
 		

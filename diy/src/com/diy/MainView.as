@@ -6,6 +6,7 @@
 	import com.diy.models.Setting;
 	import com.diy.views.common.BaseSprite;
 	import com.diy.views.video.VideoPlayer;
+	import com.diy.vo.common.DispatcherVo;
 	import flash.events.Event;
 	import flash.external.ExternalInterface;
 	
@@ -25,6 +26,7 @@
 		
 		private var controller:Controller;
 		private var video:VideoPlayer;
+		
 		public function MainView() 
 		{
 			controller = new Controller;
@@ -36,14 +38,18 @@
 			video = new VideoPlayer;
 			addChild(video);
 			onStageResizeHandler(null);
-			//dispatcher.dispatchEvent(new TestModuleEvent(TestModuleEvent.GET_BOBO_MODULE_REQUEST, Setting.MAIN_XML));
-			//dispatcher.addEventListener(TestModuleEvent.GET_BOBO_MODULE_RESPONSE, testHandler);
+			
+			addDispatcher(new DispatcherVo(dispatcher, 
+				TestModuleEvent.GET_BOBO_MODULE_RESPONSE, testHandler));
+			dispatcher.dispatchEvent(new TestModuleEvent(
+				TestModuleEvent.GET_BOBO_MODULE_REQUEST, Setting.MAIN_XML));
+			
 		}
 		
-		//private function testHandler(e:TestModuleEvent):void 
-		//{
-			//trace(e.xml);
-		//}
+		private function testHandler(e:TestModuleEvent):void 
+		{
+			trace(e.xml);
+		}
 		
 		override protected function onRemovedFromStageHandler(event:Event):void 
 		{
