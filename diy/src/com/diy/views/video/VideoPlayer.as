@@ -1,5 +1,6 @@
 ﻿package com.diy.views.video
 {
+	import com.diy.business.utils.Debug;
 	import com.diy.models.Setting;
 	import com.diy.views.common.BaseSprite;
 	import flash.display.Loader;
@@ -37,7 +38,7 @@
 		
 		private function IOErrorHandler(e:IOErrorEvent):void 
 		{
-			trace("IO_ERROR: loader video error.");
+			Debug.error("IO_ERROR: loader video error.");
 		}
 		
 		private function loaderCompleteHandler(e:Event):void 
