@@ -22,10 +22,19 @@
 		public static const EVENT_BUFFER_FULL:String = "event.buffer.full";
 		public static const EVENT_STREAM_NOT_FOUND:String = "event.stream.not.found";
 		
+		private var _data:String;
+		
 		public function VideoManagerEvent(eventName:String, infoCode:String = null) 
 		{
 			super(eventName);
 			this.data = infoCode;
+		}
+		
+		public function get data():String { return _data; }
+		
+		public function set data(value:String):void 
+		{
+			_data = value;
 		}
 		
 	}
