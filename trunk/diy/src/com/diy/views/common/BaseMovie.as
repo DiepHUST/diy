@@ -41,8 +41,15 @@
 		
 		override public function removeChild(child:DisplayObject):DisplayObject 
 		{
-			displays.splice(displays.indexOf(child), 1);
-			return super.removeChild(child);
+			if (child != null && super.contains(child))
+			{
+				displays.splice(displays.indexOf(child), 1);
+				return super.removeChild(child);
+			}
+			else
+			{
+				return null;
+			}
 		}
 		
 		protected function addDispatcher(dv:DispatcherVo):void
@@ -70,7 +77,7 @@
 			var len:int = displays.length;
 			for (var i:int = 0; i < len; i++)
 			{
-				removeChild(displays[i]);
+				super.removeChild(displays[i]);
 			}
 		}
 		
@@ -89,7 +96,7 @@
 		{
 			removeEventListener(Event.ADDED_TO_STAGE, onAddedToStageHandler);
 			stage.addEventListener(Event.RESIZE, onStageResizeHandler);
-			//stageManager = StageManager.getInstance(stage);
+			stageManager = StageManager.getInstance(stage);
 		}
 		
 		protected function onStageResizeHandler(event:Event):void 
