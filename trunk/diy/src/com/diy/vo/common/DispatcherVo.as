@@ -12,15 +12,36 @@
 	 */
 	public class DispatcherVo implements ValueObject
 	{
-		public var dispatcher:CairngormEventDispatcher;
-		public var type:String;
-		public var handler:Function;
+		private var _dispatcher:CairngormEventDispatcher;
+		private var _type:String;
+		private var _handler:Function;
 		
 		public function DispatcherVo(dispatcher:CairngormEventDispatcher = null, type:String = null, handler:Function = null) 
 		{
 			this.dispatcher = dispatcher;
 			this.type = type;
 			this.handler = handler;
+		}
+		
+		public function get dispatcher():CairngormEventDispatcher { return _dispatcher; }
+		
+		public function set dispatcher(value:CairngormEventDispatcher):void 
+		{
+			_dispatcher = value;
+		}
+		
+		public function get type():String { return _type; }
+		
+		public function set type(value:String):void 
+		{
+			_type = value;
+		}
+		
+		public function get handler():Function { return _handler; }
+		
+		public function set handler(value:Function):void 
+		{
+			_handler = value;
 		}
 		
 	}
