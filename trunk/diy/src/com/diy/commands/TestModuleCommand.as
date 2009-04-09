@@ -2,6 +2,7 @@
 {
 	import com.adobe.cairngorm.commands.ICommand;
 	import com.adobe.cairngorm.control.CairngormEvent;
+	import com.diy.business.utils.Debug;
 	import com.diy.events.TestModuleEvent;
 	import flash.events.Event;
 	import flash.events.IOErrorEvent;
@@ -39,7 +40,7 @@
 			catch (err:Error)
 			{
 				removeLoader();
-				trace("error:load xml failed!");
+				Debug.error("error:load xml failed!");
 			}
 		}
 		
@@ -53,13 +54,13 @@
 		private function onSecurityHandler(event:SecurityErrorEvent):void 
 		{
 			removeLoader();
-			trace("error:load angel module security error!");
+			Debug.error("error:load angel module security error!");
 		}
 		
 		private function onLoaderIOErrorHandler(event:IOErrorEvent):void 
 		{
 			removeLoader();
-			trace("error:load angel module io error!");
+			Debug.error("error:load angel module io error!");
 		}
 		
 		private function onLoaderCompleteHandler(event:Event):void 

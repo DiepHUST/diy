@@ -1,6 +1,7 @@
 ﻿package com.diy
 {
 	import adobe.utils.MMExecute;
+	import com.diy.business.utils.Debug;
 	import com.diy.control.Controller;
 	import com.diy.events.TestModuleEvent;
 	import com.diy.models.Setting;
@@ -36,7 +37,7 @@
 		{
 			super.onAddedToStageHandler(event);
 			video = new VideoPlayer;
-			addChild(video);
+			stageManager.addChild(video);
 			onStageResizeHandler(null);
 			
 			addDispatcher(new DispatcherVo(dispatcher, 
@@ -48,7 +49,7 @@
 		
 		private function testHandler(e:TestModuleEvent):void 
 		{
-			trace(e.xml);
+			Debug.log(e.xml);
 		}
 		
 		override protected function onRemovedFromStageHandler(event:Event):void 
