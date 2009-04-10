@@ -12,7 +12,9 @@
 	import flash.display.MovieClip;
 	import flash.display.Sprite;
 	import flash.events.Event;
+	import flash.events.TimerEvent;
 	import flash.external.ExternalInterface;
+	import flash.utils.Timer;
 	
 	/**
 	 * ...
@@ -29,7 +31,7 @@
 		private const HEIGHT:Number = 287;
 		
 		private var controller:Controller;
-		private var video:VideoPlayer;
+		private var swfVideo:Sprite;
 		private var swfManager:SwfManager;
 		
 		public function MainView() 
@@ -40,21 +42,27 @@
 		override protected function onAddedToStageHandler(event:Event):void 
 		{
 			super.onAddedToStageHandler(event);
-			//video = new VideoPlayer;
-			//stageManager.addChild(video);
 			
-			var swfVideo:MovieClip = new MovieClip;
+			swfVideo = new Sprite;
 			swfManager = new SwfManager(swfVideo);
-			swfManager.play("videos/video001.swf");
-			addChild(swfVideo);
+			swfManager.play("videos/video.swf");
+			stageManager.addChild(swfVideo);
 			
+			var t:Timer = new Timer(5000, 1);
+			t.addEventListener(TimerEvent.TIMER, tt);
+			t.start();
+			
+			addDispatcher(new DispatcherVo(dispatcher, 
+				TestModuleEvent.GET_BOBO_MODULE_RESPONSE, testHandler));
+			dispatcher.dispatchEvent(new TestModuleEvent(
+				TestModuleEvent.GET_BOBO_MODULE_REQUEST, Setting.MAIN_XML));
+				
 			onStageResizeHandler(null);
-			
-			//addDispatcher(new DispatcherVo(dispatcher, 
-			//	TestModuleEvent.GET_BOBO_MODULE_RESPONSE, testHandler));
-			//dispatcher.dispatchEvent(new TestModuleEvent(
-			//	TestModuleEvent.GET_BOBO_MODULE_REQUEST, Setting.MAIN_XML));
-			
+		}
+		
+		private function tt(e:TimerEvent):void 
+		{
+			swfManager.stop();
 		}
 		
 		private function testHandler(e:TestModuleEvent):void 
@@ -72,8 +80,8 @@
 			super.onStageResizeHandler(event);
 			var w:Number = stage.stageWidth;
 			var h:Number = stage.stageHeight;
-			//video.x = (w - WIDTH) / 2;
-			//video.y = (h - HEIGHT) / 2;
+			swfVideo.x = (w - WIDTH) / 2;
+			swfVideo.y = (h - HEIGHT) / 2;
 		}
 	}
 	
