@@ -62,7 +62,7 @@
 		
 		private function tt(e:TimerEvent):void 
 		{
-			swfManager.stop();
+			//swfManager.stop();
 		}
 		
 		private function testHandler(e:TestModuleEvent):void 

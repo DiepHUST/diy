@@ -191,16 +191,6 @@
 			return value.toString(10);
 		}
 		
-		public function get isPlaying():Boolean
-		{
-			return _isPlaying;
-		}
-		
-		public function get isPause():Boolean
-		{
-			return _isPause;
-		}
-		
 		public function get totalTime():Number 
 		{ 
 			return _totalTime; 
