@@ -1,15 +1,20 @@
 ﻿package com.diy.business 
 {
-	import flash.display.MovieClip;
-	import flash.display.Sprite;
 	import flash.events.Event;
 	import flash.display.Loader;
-	import flash.display.Bitmap;
 	import flash.events.IOErrorEvent;
 	import flash.events.SecurityErrorEvent;
 	import flash.net.URLRequest;
 	import flash.events.ProgressEvent;
-
+	
+	/**
+	 * ...
+	 * @author Sheldon Song
+	 * @homepage http://xinzy10.vicp.net
+	 * @email xinzy10@gmail.com
+	 * @version Version 1.0
+	 * @description the class function
+	 */
 	public class LoadSwf
 	{
 		private var openFunction:Function;
