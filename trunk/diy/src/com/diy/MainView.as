@@ -6,8 +6,11 @@
 	import com.diy.events.TestModuleEvent;
 	import com.diy.models.Setting;
 	import com.diy.views.common.BaseSprite;
+	import com.diy.views.common.player.SwfManager;
 	import com.diy.views.video.VideoPlayer;
 	import com.diy.vo.common.DispatcherVo;
+	import flash.display.MovieClip;
+	import flash.display.Sprite;
 	import flash.events.Event;
 	import flash.external.ExternalInterface;
 	
@@ -27,6 +30,7 @@
 		
 		private var controller:Controller;
 		private var video:VideoPlayer;
+		private var swfManager:SwfManager;
 		
 		public function MainView() 
 		{
@@ -36,14 +40,20 @@
 		override protected function onAddedToStageHandler(event:Event):void 
 		{
 			super.onAddedToStageHandler(event);
-			video = new VideoPlayer;
-			stageManager.addChild(video);
+			//video = new VideoPlayer;
+			//stageManager.addChild(video);
+			
+			var swfVideo:MovieClip = new MovieClip;
+			swfManager = new SwfManager(swfVideo);
+			swfManager.play("videos/video001.swf");
+			addChild(swfVideo);
+			
 			onStageResizeHandler(null);
 			
-			addDispatcher(new DispatcherVo(dispatcher, 
-				TestModuleEvent.GET_BOBO_MODULE_RESPONSE, testHandler));
-			dispatcher.dispatchEvent(new TestModuleEvent(
-				TestModuleEvent.GET_BOBO_MODULE_REQUEST, Setting.MAIN_XML));
+			//addDispatcher(new DispatcherVo(dispatcher, 
+			//	TestModuleEvent.GET_BOBO_MODULE_RESPONSE, testHandler));
+			//dispatcher.dispatchEvent(new TestModuleEvent(
+			//	TestModuleEvent.GET_BOBO_MODULE_REQUEST, Setting.MAIN_XML));
 			
 		}
 		
@@ -62,8 +72,8 @@
 			super.onStageResizeHandler(event);
 			var w:Number = stage.stageWidth;
 			var h:Number = stage.stageHeight;
-			video.x = (w - WIDTH) / 2;
-			video.y = (h - HEIGHT) / 2;
+			//video.x = (w - WIDTH) / 2;
+			//video.y = (h - HEIGHT) / 2;
 		}
 	}
 	

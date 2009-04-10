@@ -1,6 +1,5 @@
 ﻿package com.diy.vo.videos.video001 
 {
-	
 	/**
 	 * ...
 	 * @author Sheldon Song
