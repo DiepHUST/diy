@@ -17,12 +17,12 @@
 	 */
 	public class LoadBitmap 
 	{
-		private var callBack:Function;
+		private var completeFunc:Function;
 		private var errorFunc:Function;
 		
-		public function LoadBitmap(url:String, callBack:Function, errorFunc:Function = null) 
+		public function LoadBitmap(url:String, completeFunc:Function, errorFunc:Function = null) 
 		{
-			this.callBack = callBack;
+			this.completeFunc = completeFunc;
 			this.errorFunc = errorFunc;
 			var loader:Loader = new Loader();
 			loader.contentLoaderInfo.addEventListener(Event.COMPLETE, onCompleteHandlelr);
@@ -33,7 +33,7 @@
 		
 		private function onCompleteHandlelr(e:Event):void 
 		{
-			callBack(Bitmap(e.target.content));
+			completeFunc(Bitmap(e.target.content));
 		}
 		
 		private function onErrorHandler(e:Event):void 
