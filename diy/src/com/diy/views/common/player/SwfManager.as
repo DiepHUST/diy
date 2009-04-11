@@ -50,11 +50,13 @@
 		
 		private var fps:int;
 		
-		public function SwfManager(swfContainer:Sprite) 
+		public function SwfManager(swfContainer:Sprite, widthValue:Number, heightValue:Number ) 
 		{
 			this.swfContainer = swfContainer;
 			this._isPause = true;
 			this._isPlaying = false;
+			this._movieWidth = widthValue;
+			this._movieHeight = heightValue;
 		}
 		
 		public function play(url:String):void
@@ -131,8 +133,8 @@
 			_totalHour = Math.floor(_totalTime / 3600);
 			_totalMinute = Math.floor(_totalTime / 60);
 			_totalSecond =  _totalTime;
-			_movieWidth = swf.width;
-			_movieHeight = swf.height;
+			swf.width = _movieWidth;
+			swf.height = _movieHeight;
 			swfContainer.addChild(swf);
 		}
 		

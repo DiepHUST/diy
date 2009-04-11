@@ -16,12 +16,12 @@
 	 */
 	public class LoadXml
 	{
-		private var callBack:Function;
+		private var completeFunc:Function;
 		private var errorFunc:Function;
 		
-		public function LoadXml(url:String, callBack:Function, errorFunc:Function = null) 
+		public function LoadXml(url:String, completeFunc:Function, errorFunc:Function = null) 
 		{
-			this.callBack = callBack;
+			this.completeFunc = completeFunc;
 			this.errorFunc = errorFunc;
 			var loader:URLLoader = new URLLoader();
 			loader.addEventListener(Event.COMPLETE, onCompleteHandlelr);
@@ -32,7 +32,7 @@
 		
 		private function onCompleteHandlelr(e:Event):void 
 		{
-			callBack(e.target.data);
+			completeFunc(e.target.data);
 		}
 		
 		private function onErrorHandler(e:Event):void 

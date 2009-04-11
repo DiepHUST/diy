@@ -1,6 +1,8 @@
 ﻿package com.diy
 {
 	import adobe.utils.MMExecute;
+	import caurina.transitions.Tweener;
+	import com.diy.business.LoadBitmap;
 	import com.diy.business.utils.Debug;
 	import com.diy.control.Controller;
 	import com.diy.events.TestModuleEvent;
@@ -9,6 +11,7 @@
 	import com.diy.views.common.player.SwfManager;
 	import com.diy.views.video.VideoPlayer;
 	import com.diy.vo.common.DispatcherVo;
+	import flash.display.Bitmap;
 	import flash.display.MovieClip;
 	import flash.display.Sprite;
 	import flash.events.Event;
@@ -26,14 +29,10 @@
 	 */
 	public class MainView extends BaseSprite
 	{
-		
-		private const WIDTH:Number = 492;
-		private const HEIGHT:Number = 287;
-		
 		private var controller:Controller;
 		private var swfVideo:Sprite;
 		private var swfManager:SwfManager;
-		
+		private var videoStage:VideoStage;
 		public function MainView() 
 		{
 			controller = new Controller;
@@ -43,27 +42,52 @@
 		{
 			super.onAddedToStageHandler(event);
 			
+			videoStage = new VideoStage;
+			videoStage.leftCurtain.visible = false;
+			videoStage.rightCurtain.visible = false;
+			new LoadBitmap("images/pic001.jpg", compHanlder);
+			stageManager.addChild(videoStage);
+			
 			swfVideo = new Sprite;
-			swfManager = new SwfManager(swfVideo);
-			swfManager.play("http://www.memyself.cn/video.swf");
-			stageManager.addChild(swfVideo);
+			swfManager = new SwfManager(swfVideo, 370, 204);
+			//swfManager.play("http://www.memyself.cn/video.swf");
+			swfManager.play("videos/video.swf");
+
+			swfVideo.x = 10;
+			swfVideo.y = 7;
+			videoStage.centerVideoContrainer.addChild(swfVideo);
 			
-			var t:Timer = new Timer(5000, 1);
-			t.addEventListener(TimerEvent.TIMER, tt);
-			t.start();
+			//var t:Timer = new Timer(5000, 1);
+			//t.addEventListener(TimerEvent.TIMER, tt);
+			//t.start();
 			
-			addDispatcher(new DispatcherVo(dispatcher, 
-				TestModuleEvent.GET_BOBO_MODULE_RESPONSE, testHandler));
-			dispatcher.dispatchEvent(new TestModuleEvent(
-				TestModuleEvent.GET_BOBO_MODULE_REQUEST, Setting.MAIN_XML));
+			//addDispatcher(new DispatcherVo(dispatcher, 
+				//TestModuleEvent.GET_BOBO_MODULE_RESPONSE, testHandler));
+			//dispatcher.dispatchEvent(new TestModuleEvent(
+				//TestModuleEvent.GET_BOBO_MODULE_REQUEST, Setting.MAIN_XML));
 				
 			onStageResizeHandler(null);
 		}
 		
-		private function tt(e:TimerEvent):void 
+		private function compHanlder(bit:Bitmap):void
 		{
-			//swfManager.stop();
+			bit.x = 3;
+			bit.y = 2;
+			bit.width = 114;
+			bit.height = 62;
+			var b:Bitmap = new Bitmap(bit.bitmapData.clone());
+			videoStage.leftVideoContainer.addChild(bit);
+			b.x = 3;
+			b.y = 2;
+			b.width = 114;
+			b.height = 62;
+			videoStage.rightVideoContainer.addChild(b);
 		}
+		
+		//private function tt(e:TimerEvent):void 
+		//{
+			//swfManager.stop();
+		//}
 		
 		private function testHandler(e:TestModuleEvent):void 
 		{
@@ -80,8 +104,8 @@
 			super.onStageResizeHandler(event);
 			var w:Number = stage.stageWidth;
 			var h:Number = stage.stageHeight;
-			swfVideo.x = (w - WIDTH) / 2;
-			swfVideo.y = (h - HEIGHT) / 2;
+			//swfVideo.x = (w - swfManager.movieWidth) / 2;
+			//swfVideo.y = (h - swfManager.movieHeight) / 2;
 		}
 	}
 	
