@@ -14,7 +14,7 @@
 	public class SwfManagerEvent extends CairngormEvent 
 	{
 		public static const EVENT_INFO_CODE:String = "event.info.code";
-		private var _data:String;
+		public static const EVENT_SWF_LOAD_COMPLETE:String = "event.swf.load.complete";
 		
 		public function SwfManagerEvent(eventName:String, infoCode:String = null) 
 		{ 
@@ -22,15 +22,6 @@
 			this.data = infoCode;
 		} 
 		
-		public function get data():String 
-		{
-			return _data; 
-		}
-		
-		public function set data(value:String):void 
-		{
-			_data = value;
-		}
 	}
 	
 }
