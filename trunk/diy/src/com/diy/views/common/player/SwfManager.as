@@ -22,7 +22,7 @@
 	 * @version Version 1.0
 	 * @description the class function
 	 */
-	public class SwfManager
+	public class SwfManager extends EventDispatcher
 	{
 		private var swfContainer:Sprite;
 		private var swf:MovieClip;
@@ -64,7 +64,12 @@
 			{
 				swfContainer.removeChild(swf);
 			}
-			new LoadSwf(url, onCompleteHandler, onOpenHandler, onIOErrorHandler, onProgressHandler);
+			new LoadSwf(url, onCompleteHandler, onOpenHandler, onIOErrorHandler, onProgressHandler, onHttpStatusHandler);
+		}
+		
+		private function onHttpStatusHandler(e:HTTPStatusEvent):void
+		{
+			Debug.log(e.status);
 		}
 		
 		public function close():void
@@ -113,36 +118,42 @@
 			isPause = true;
 		}
 		
-		
-		
-		private function onOpenHandler():void
+		private function onOpenHandler(e:Event):void
 		{
 			
 		}
 		
-		private function onCompleteHandler(result:MovieClip):void 
+		private function onCompleteHandler(e:Event):void 
 		{
-			swf = result;
-			swfContainer.addChild(swf);
-			fps = swf.stage.frameRate;
+			swf = e.target.content;
+			fps = e.target.frameRate;
 			_totalTime = Math.round(swf.totalFrames / fps);
 			_totalHour = Math.floor(_totalTime / 3600);
 			_totalMinute = Math.floor(_totalTime / 60);
 			_totalSecond =  _totalTime;
 			_movieWidth = swf.width;
 			_movieHeight = swf.height;
-
+			swfContainer.addChild(swf);
 		}
 		
 		private function onProgressHandler(e:ProgressEvent):void 
 		{
-			_bufferLoad = e.bytesLoaded;
-			_bufferTotal = e.bytesTotal;
+			_bufferLoad = e.target.bytesLoaded;
+			
+			if (_bufferTotal == 0) 
+			{
+				_bufferTotal = e.target.bytesTotal;
+			}
+			
+			if (_bufferLoad == _bufferTotal) 
+			{
+				dispatchEvent(new SwfManagerEvent(SwfManagerEvent.EVENT_SWF_LOAD_COMPLETE));
+			}
 		}
 		
-		private function onIOErrorHandler(e:IOErrorEvent):void 
+		private function onIOErrorHandler(e:Event):void 
 		{
-			Debug.error("Security error.");
+			Debug.error("Error." + e);
 		}
 		
 		public function getCurrentTimeString():String

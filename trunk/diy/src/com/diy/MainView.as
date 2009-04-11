@@ -45,7 +45,7 @@
 			
 			swfVideo = new Sprite;
 			swfManager = new SwfManager(swfVideo);
-			swfManager.play("videos/video.swf");
+			swfManager.play("http://www.memyself.cn/video.swf");
 			stageManager.addChild(swfVideo);
 			
 			var t:Timer = new Timer(5000, 1);
