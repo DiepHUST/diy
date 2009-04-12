@@ -3,6 +3,7 @@
 	import adobe.utils.MMExecute;
 	import caurina.transitions.Tweener;
 	import com.diy.business.LoadBitmap;
+	import com.diy.business.LoadXml;
 	import com.diy.business.utils.Debug;
 	import com.diy.control.Controller;
 	import com.diy.events.TestModuleEvent;
@@ -11,6 +12,7 @@
 	import com.diy.views.common.player.SwfManager;
 	import com.diy.views.video.VideoPlayer;
 	import com.diy.vo.common.DispatcherVo;
+	import com.diy.vo.common.SysConfigVo;
 	import flash.display.Bitmap;
 	import flash.display.MovieClip;
 	import flash.display.Sprite;
@@ -33,6 +35,7 @@
 		private var swfVideo:Sprite;
 		private var swfManager:SwfManager;
 		private var videoStage:VideoStage;
+		
 		public function MainView() 
 		{
 			controller = new Controller;
@@ -42,10 +45,14 @@
 		{
 			super.onAddedToStageHandler(event);
 			
+			new LoadXml(Setting.MAIN_XML, onLoadXmlCompleteHandler, onErrorHandler);
+			
 			videoStage = new VideoStage;
-			videoStage.leftCurtain.visible = false;
-			videoStage.rightCurtain.visible = false;
-			new LoadBitmap("images/pic001.jpg", compHanlder);
+			Tweener.addTween(videoStage.leftCurtain, { x:-178, time:5, transition:"linear"} );
+			Tweener.addTween(videoStage.rightCurtain, { x:820, time:5, transition:"linear"} );
+			videoStage.leftVideoContainer.buttonMode = true;
+			videoStage.rightVideoContainer.buttonMode = true;
+			new LoadBitmap("images/pic001.jpg", onLoadBitmapCompHanlder);
 			stageManager.addChild(videoStage);
 			
 			swfVideo = new Sprite;
@@ -55,6 +62,7 @@
 
 			swfVideo.x = 10;
 			swfVideo.y = 7;
+			videoStage.centerVideoContrainer.buttonMode = true;
 			videoStage.centerVideoContrainer.addChild(swfVideo);
 			
 			//var t:Timer = new Timer(5000, 1);
@@ -69,7 +77,20 @@
 			onStageResizeHandler(null);
 		}
 		
-		private function compHanlder(bit:Bitmap):void
+		private function onLoadXmlCompleteHandler(result:String):void
+		{
+			var vo:SysConfigVo = new SysConfigVo;
+			var xml:XML = new XML(result);
+			vo.mainSwfUrl = xml.mainSwf.@url;
+			constModel.sysConfigVo = vo;
+		}
+		
+		private function onErrorHandler(e:Event):void
+		{
+			Debug.error("Error: LoadingView load xml error." + e);
+		}
+		
+		private function onLoadBitmapCompHanlder(bit:Bitmap):void
 		{
 			bit.x = 3;
 			bit.y = 2;

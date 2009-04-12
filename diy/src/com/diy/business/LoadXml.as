@@ -39,7 +39,7 @@
 		{
 			if (errorFunc != null)
 			{
-				errorFunc();
+				errorFunc(e);
 			}
 		}
 		
