@@ -1,5 +1,6 @@
 ﻿package com.diy.models 
 {
+	import com.diy.vo.common.SysConfigVo;
 	
 	/**
 	 * ...
@@ -12,6 +13,8 @@
 	public class ConstModel 
 	{
 		private static var instance:ConstModel;
+		private var _sysConfigVo:SysConfigVo;
+		
 		public function ConstModel() 
 		{
 			if (instance == null)
@@ -27,6 +30,16 @@
 				instance = new ConstModel();
 			}
 			return instance;
+		}
+		
+		public function get sysConfigVo():SysConfigVo 
+		{ 
+			return _sysConfigVo;
+		}
+		
+		public function set sysConfigVo(value:SysConfigVo):void 
+		{
+			_sysConfigVo = value;
 		}
 	}
 	
