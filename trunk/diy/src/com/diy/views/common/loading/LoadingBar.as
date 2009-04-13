@@ -4,6 +4,8 @@
 	import com.diy.business.LoadXml;
 	import com.diy.models.Setting;
 	import com.diy.views.common.BaseMovie;
+	import flash.display.StageAlign;
+	import flash.display.StageScaleMode;
 	import flash.events.Event;
 	import flash.text.TextField;
 	import flash.text.TextFormat;
@@ -19,46 +21,54 @@
 	public class LoadingBar extends BaseMovie
 	{
 		private var loading:Loading;
-		private var _message:String = "";
-		private var label:TextField;
+		private var _msg:String = "";
 		
 		public function LoadingBar() 
 		{
-			
+			addEventListener(Event.ENTER_FRAME, textHandler);
+		}
+		
+		private function textHandler(e:Event):void 
+		{
+			if (loading.currentFrame >= 30)
+			{
+				loading.message.text = _msg;
+			}
+			else
+			{
+				loading.message.text = "";
+			}
 		}
 		
 		override protected function onAddedToStageHandler(event:Event):void 
 		{
 			super.onAddedToStageHandler(event);
+			stage.align = StageAlign.TOP_LEFT;
+			stage.scaleMode = StageScaleMode.NO_SCALE;
+			stage.showDefaultContextMenu = false;
 			configUI();
-			
 		}
 		
 		private function configUI():void
 		{
 			loading = new Loading;
 			addChild(loading);
-			
-			label = new TextField;
-			label.defaultTextFormat = new TextFormat("Verdana", 14, "0x49941D", true, null, null, null, "right");
-			label.width = 56;
-			label.height = 25;
-			label.x = 116;
-			label.y = 7;
-			label.selectable = false;
-			label.text = _message;
-			addChild(label);
+			loading.message = new TextField;
+			loading.message.defaultTextFormat = new TextFormat("Verdana", 14, "0x49941D", true, null, null, null, "right");
+			loading.message.x = 144;
+			loading.message.y = 6;
+			loading.message.selectable = false;
+			addChild(loading.message);
 		}
 		
-		public function get message():String 
+		public function get msg():String 
 		{ 
-			return _message; 
+			return _msg; 
 		}
 		
-		public function set message(value:String):void 
+		public function set msg(value:String):void 
 		{
-			_message = value;
-			label.text = _message;
+			_msg = value;
 		}
 		
 	}

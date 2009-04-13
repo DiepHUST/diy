@@ -36,9 +36,15 @@
 		private var swfManager:SwfManager;
 		private var videoStage:VideoStage;
 		
+		[Embed(source='../../../bin/images/enter.png')]
+		private var background:Class;
+		private var enter:*;
+		
 		public function MainView() 
 		{
 			controller = new Controller;
+			enter = new background;
+			addChild(enter);
 		}
 		
 		override protected function onAddedToStageHandler(event:Event):void 
@@ -53,7 +59,7 @@
 			videoStage.leftVideoContainer.buttonMode = true;
 			videoStage.rightVideoContainer.buttonMode = true;
 			new LoadBitmap("images/pic001.jpg", onLoadBitmapCompHanlder);
-			stageManager.addChild(videoStage);
+			//stageManager.addChild(videoStage);
 			
 			swfVideo = new Sprite;
 			swfManager = new SwfManager(swfVideo, 370, 204);
@@ -125,8 +131,18 @@
 			super.onStageResizeHandler(event);
 			var w:Number = stage.stageWidth;
 			var h:Number = stage.stageHeight;
-			//swfVideo.x = (w - swfManager.movieWidth) / 2;
-			//swfVideo.y = (h - swfManager.movieHeight) / 2;
+			videoStage.x = (w - 972) / 2;
+			videoStage.y = (h - 480) / 2;
+			enter.x = (w - 1280) / 2;
+			enter.y = (h - 1024) / 2;
+			if (w > 1280)
+			{
+				this.graphics.clear();
+				this.graphics.beginFill(0x000000);
+				this.graphics.drawRect(0, 0, w, h);
+				this.graphics.endFill();
+			}
+			
 		}
 	}
 	
