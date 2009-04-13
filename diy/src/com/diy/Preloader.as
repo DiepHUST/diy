@@ -9,6 +9,8 @@
 	import com.diy.vo.common.SysConfigVo;
 	import flash.display.DisplayObject;
 	import flash.display.MovieClip;
+	import flash.display.StageAlign;
+	import flash.display.StageScaleMode;
 	import flash.events.Event;
 	import flash.events.ProgressEvent;
 	import flash.ui.Mouse;
@@ -37,6 +39,9 @@
 		override protected function onAddedToStageHandler(event:Event):void 
 		{
 			super.onAddedToStageHandler(event);
+			stage.align = StageAlign.TOP_LEFT;
+			stage.scaleMode = StageScaleMode.NO_SCALE;
+			stage.showDefaultContextMenu = false;
 			loading = new LoadingBar;
 			stageManager.addChild(loading);
 			var w:Number = stage.stageWidth;
@@ -53,13 +58,13 @@
 		
 		private function progress(e:ProgressEvent):void 
 		{
-			loading.message = Math.floor(e.bytesLoaded / e.bytesTotal * 100) + "%"; 
+			loading.msg = Math.floor(e.bytesLoaded / e.bytesTotal * 100) + "%"; 
 		}
 		
-		private function checkFrame(e:Event):void 
+		private function checkFrame(e:Event):void
 		{
-			loading.x = mouseX;
-			loading.y = mouseY;
+			loading.x = mouseX - 49;
+			loading.y = mouseY - 106;
 			if (currentFrame == totalFrames) 
 			{
 				removeEventListener(Event.ENTER_FRAME, checkFrame);
