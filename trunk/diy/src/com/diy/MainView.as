@@ -43,8 +43,14 @@
 		public function MainView() 
 		{
 			controller = new Controller;
+			
+			
+		}
+		
+		private function configUI():void
+		{
 			enter = new background;
-			addChild(enter);
+			//addChild(enter);
 		}
 		
 		override protected function onAddedToStageHandler(event:Event):void 
@@ -59,7 +65,7 @@
 			videoStage.leftVideoContainer.buttonMode = true;
 			videoStage.rightVideoContainer.buttonMode = true;
 			new LoadBitmap("images/pic001.jpg", onLoadBitmapCompHanlder);
-			//stageManager.addChild(videoStage);
+			stageManager.addChild(videoStage);
 			
 			swfVideo = new Sprite;
 			swfManager = new SwfManager(swfVideo, 370, 204);
@@ -80,6 +86,7 @@
 			//dispatcher.dispatchEvent(new TestModuleEvent(
 				//TestModuleEvent.GET_BOBO_MODULE_REQUEST, Setting.MAIN_XML));
 				
+			configUI();
 			onStageResizeHandler(null);
 		}
 		
