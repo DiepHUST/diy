@@ -6,6 +6,7 @@
 	import com.diy.models.Setting;
 	import com.diy.views.common.BaseMovie;
 	import com.diy.views.common.loading.LoadingBar;
+	import com.diy.views.common.loading.PreloadView;
 	import com.diy.vo.common.SysConfigVo;
 	import flash.display.DisplayObject;
 	import flash.display.MovieClip;
@@ -33,7 +34,6 @@
 		{
 			addEventListener(Event.ENTER_FRAME, checkFrame);
 			loaderInfo.addEventListener(ProgressEvent.PROGRESS, progress);
-			Mouse.hide();
 		}
 		
 		override protected function onAddedToStageHandler(event:Event):void 
@@ -44,6 +44,7 @@
 			stage.showDefaultContextMenu = false;
 			loading = new LoadingBar;
 			stageManager.addChild(loading);
+			Mouse.hide();
 			var w:Number = stage.stageWidth;
 			var h:Number = stage.stageHeight;
 			loading.x = (w - loading.width) / 2;
@@ -63,8 +64,8 @@
 		
 		private function checkFrame(e:Event):void
 		{
-			loading.x = mouseX - 49;
-			loading.y = mouseY - 106;
+			loading.x = mouseX - 60;
+			loading.y = mouseY;
 			if (currentFrame == totalFrames) 
 			{
 				removeEventListener(Event.ENTER_FRAME, checkFrame);

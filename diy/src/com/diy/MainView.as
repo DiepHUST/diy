@@ -70,7 +70,7 @@
 			swfVideo = new Sprite;
 			swfManager = new SwfManager(swfVideo, 370, 204);
 			//swfManager.play("http://www.memyself.cn/video.swf");
-			swfManager.play("videos/video.swf");
+			swfManager.play("videos/1.swf");
 
 			swfVideo.x = 10;
 			swfVideo.y = 7;
