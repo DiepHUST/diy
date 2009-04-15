@@ -49,6 +49,19 @@
 			var h:Number = stage.stageHeight;
 			loading.x = (w - loading.width) / 2;
 			loading.y = (h - loading.height) / 2;
+			onStageResizeHandler(null);
+			
+		}
+			
+		override protected function onStageResizeHandler(event:Event):void 
+		{
+			super.onStageResizeHandler(event);
+			var w:Number = stage.stageWidth;
+			var h:Number = stage.stageHeight;
+			this.graphics.clear();
+			this.graphics.beginFill(0x000000, .8);
+			this.graphics.drawRect(0, 0, w, h);
+			this.graphics.endFill();
 		}
 		
 		override protected function onRemovedFromStageHandler(event:Event):void 

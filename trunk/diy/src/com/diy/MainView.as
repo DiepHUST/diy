@@ -36,7 +36,7 @@
 		private var swfManager:SwfManager;
 		private var videoStage:VideoStage;
 		
-		[Embed(source='../../../bin/images/enter.png')]
+		[Embed(source='../../../bin/images/enter.jpg')]
 		private var background:Class;
 		private var enter:*;
 		
@@ -50,7 +50,7 @@
 		private function configUI():void
 		{
 			enter = new background;
-			//addChild(enter);
+			addChild(enter);
 		}
 		
 		override protected function onAddedToStageHandler(event:Event):void 
