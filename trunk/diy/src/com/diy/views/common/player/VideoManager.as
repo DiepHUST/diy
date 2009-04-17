@@ -44,11 +44,11 @@
 		private var _volume:Number;
 		private var _isGetMetaData:Boolean;
 		
-		private const BUFFER_TIME:int = 1;
+		private const BUFFER_TIME:int = 3;
 		
-		public function VideoManager(video:Video, mediaServerUrl:String = null)
+		public function VideoManager(video:Video, playCount:Number = 999, mediaServerUrl:String = null)
 		{
-			this.playConut = 0;
+			this.playConut = playCount;
 			this.video = video;
 			this._isSoundOn = true;
 			this._isPause = false;
@@ -91,6 +91,7 @@
 					break;
 				case "NetStream.Play.Stop":
 					dispatchEvent(new VideoManagerEvent(VideoManagerEvent.EVENT_PLAY_STOP));
+					rePlay();
 					break;
 				case "NetStream.Buffer.Empty":
 					dispatchEvent(new VideoManagerEvent(VideoManagerEvent.EVENT_BUFFER_EMPTY));
@@ -171,7 +172,7 @@
 			dispatchEvent(new VideoManagerEvent(VideoManagerEvent.EVENT_META_DATA_COMPLETE));
 		}
 		
-		private function play(url:String):void
+		public function play(url:String):void
 		{
 			this.url = url;
 			if (netCon != null)
@@ -196,6 +197,17 @@
 		{
 			netStream.resume();
 			_isPause = false;
+		}
+		
+		public function rePlay():void
+		{
+			playConut = playConut - 1;
+			if (playConut > 0) 
+			{
+				netStream.seek(0);
+				netStream.resume();
+				_isPause = false;
+			}
 		}
 		
 		public function stop():void
