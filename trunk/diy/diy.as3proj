@@ -47,9 +47,10 @@
     <element path="lib\Cairngorm.swc" />
     <element path="lib\flexlib.swc" />
     <element path="lib\tweener.swc" />
-    <element path="lib\videoStage.swc" />
     <element path="lib\loading.swc" />
     <element path="lib\font.swc" />
+    <element path="lib\videoStage.swc" />
+    <element path="lib\main.swc" />
   </libraryPaths>
   <!-- External Libraries -->
   <externalLibraryPaths>
@@ -65,11 +66,11 @@
   </intrinsics>
   <!-- Assets to embed into the output SWF -->
   <library>
-    <!-- example: <asset path="..." id="..." update="..." glyphs="..." mode="..." place="..." sharepoint="..." /> -->
+    <asset path="bin\images\enter.jpg" />
   </library>
   <!-- Class files to compile (other referenced classes will automatically be included) -->
   <compileTargets>
-    <compile path="src\com\diy\Preloader.as" />
+    <compile path="src\com\diy\MainView.as" />
   </compileTargets>
   <!-- Paths to exclude from the Project Explorer tree -->
   <hiddenPaths>
