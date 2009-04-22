@@ -70,20 +70,7 @@
 			Debug.error("Error: LoadingView load xml error." + e);
 		}
 		
-		//private function onLoadBitmapCompHanlder(bit:Bitmap):void
-		//{
-			//bit.x = 3;
-			//bit.y = 2;
-			//bit.width = 114;
-			//bit.height = 62;
-			//var b:Bitmap = new Bitmap(bit.bitmapData.clone());
-			//videoStage.leftVideoContainer.addChild(bit);
-			//b.x = 3;
-			//b.y = 2;
-			//b.width = 114;
-			//b.height = 62;
-			//videoStage.rightVideoContainer.addChild(b);
-		//}
+
 		
 
 		override protected function onRemovedFromStageHandler(event:Event):void 
