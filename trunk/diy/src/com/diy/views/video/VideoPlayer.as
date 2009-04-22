@@ -1,13 +1,9 @@
-﻿package com.diy.views.video
+﻿package com.diy.views.video 
 {
-	import com.diy.business.utils.Debug;
-	import com.diy.models.Setting;
 	import com.diy.views.common.BaseSprite;
-	import flash.display.Loader;
-	import flash.display.MovieClip;
+	import com.diy.views.common.player.SwfManager;
+	import flash.display.Sprite;
 	import flash.events.Event;
-	import flash.events.IOErrorEvent;
-	import flash.net.URLRequest;
 	
 	/**
 	 * ...
@@ -19,33 +15,21 @@
 	 */
 	public class VideoPlayer extends BaseSprite
 	{
-		private var loader:Loader;
-		private var totalTime:Number;
-		private var currentTime:Number;
+		private var swfContainer:Sprite;
+		private var swfManager:SwfManager;
 		
 		public function VideoPlayer() 
 		{
-			loader = new Loader;
+			
+			
 		}
 		
 		override protected function onAddedToStageHandler(event:Event):void 
 		{
 			super.onAddedToStageHandler(event);
-			loader.load(new URLRequest(Setting.VIDEO001));
-			loader.contentLoaderInfo.addEventListener(Event.COMPLETE, loaderCompleteHandler);
-			loader.contentLoaderInfo.addEventListener(IOErrorEvent.IO_ERROR, IOErrorHandler);
-		}
-		
-		private function IOErrorHandler(e:IOErrorEvent):void 
-		{
-			Debug.error("IO_ERROR: loader video error.");
-		}
-		
-		private function loaderCompleteHandler(e:Event):void 
-		{
-			var video:MovieClip = loader.content as MovieClip;
-			
-			addChild(video);
+			swfContainer = new Sprite;
+			swfManager = new SwfManager(swfContainer, 370, 204);
+			addChild(swfContainer);
 		}
 		
 		override protected function onRemovedFromStageHandler(event:Event):void 
@@ -53,10 +37,11 @@
 			super.onRemovedFromStageHandler(event);
 		}
 		
-		override protected function onStageResizeHandler(event:Event):void 
+		public function play(url:String):void
 		{
-			super.onStageResizeHandler(event);
+			swfManager.play(url);
 		}
+		
 	}
 	
 }
