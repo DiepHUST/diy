@@ -60,7 +60,7 @@
 				//TestModuleEvent.GET_BOBO_MODULE_RESPONSE, testHandler));
 			//dispatcher.dispatchEvent(new TestModuleEvent(
 				//TestModuleEvent.GET_BOBO_MODULE_REQUEST, Setting.MAIN_XML));
-				
+			
 			configUI();
 			onStageResizeHandler(null);
 		}

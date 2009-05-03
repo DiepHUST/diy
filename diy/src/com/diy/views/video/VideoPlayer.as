@@ -21,7 +21,6 @@
 		public function VideoPlayer() 
 		{
 			
-			
 		}
 		
 		override protected function onAddedToStageHandler(event:Event):void 

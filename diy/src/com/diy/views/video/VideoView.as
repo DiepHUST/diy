@@ -1,9 +1,7 @@
 ﻿package com.diy.views.video 
 {
 	import caurina.transitions.Tweener;
-	import com.diy.business.utils.Debug;
 	import com.diy.views.common.BaseSprite;
-	import com.diy.views.common.player.SwfManager;
 	import flash.display.Sprite;
 	import flash.events.Event;
 	import flash.events.MouseEvent;
